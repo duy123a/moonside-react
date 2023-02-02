@@ -1,40 +1,129 @@
 import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
-import { memo } from 'react';
-import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 
-export interface HeaderProps {}
+const pages = ['Posts'];
 
-function Header(props: HeaderProps) {
+function ResponsiveAppBar() {
+  const theme = useTheme();
+
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
   return (
-    <Paper component="header" square variant="outlined">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}
+            component={Link}
+            to="/"
+          >
+            <HomeIcon />
+          </IconButton>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              component={Link}
-              to="/cc"
               size="large"
-              edge="start"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
               color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
             >
-              <HomeIcon />
+              <MenuIcon />
             </IconButton>
-            <Button color="inherit" sx={{ marginLeft: 'auto' }}>
-              Add new post
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </Paper>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{ textDecoration: 'none', color: theme.palette.text.primary }}
+                      to={`/${page.toLowerCase()}`}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+            component={Link}
+            to="/"
+          >
+            <HomeIcon />
+          </IconButton>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link
+                  style={{ textDecoration: 'none', color: theme.palette.text.primary }}
+                  to={`/${page.toLowerCase()}`}
+                >
+                  {page}
+                </Link>
+              </Button>
+            ))}
+          </Box>
+
+          <Routes>
+            <Route path="/posts" element={<Button color="inherit">Login</Button>}></Route>
+            <Route path="/" element={null}></Route>
+          </Routes>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
-
-export default memo(Header);
+export default ResponsiveAppBar;

@@ -1,34 +1,29 @@
 import imageUrl from '@/assets/dashboard.png';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Box from '@mui/material/Box/Box';
-import makeStyles from '@mui/styles/makeStyles';
+import Box, { BoxProps } from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
 export interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
-const useStyles = makeStyles((theme) => ({
-  paperContainer: {
-    '&&': {
-      backgroundImage: `url(${imageUrl})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-    },
-  },
+const BackgroundContainer = styled(Box)<BoxProps>(({ theme }) => ({
+  backgroundImage: `url(${imageUrl})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
 }));
 
 function MainLayout({ children }: MainLayoutProps) {
-  const classes = useStyles();
   return (
-    <Box minHeight="100vh" className={classes.paperContainer}>
+    <BackgroundContainer minHeight="100vh">
       <Header></Header>
       {children}
       <Footer></Footer>
-    </Box>
+    </BackgroundContainer>
   );
 }
 
-export default React.memo(MainLayout);
+export default MainLayout;

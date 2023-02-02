@@ -14,6 +14,7 @@ export default function NotFound(props: NotFoundProps) {
         alignItems: 'center',
         flexDirection: 'column',
         minHeight: '90vh',
+        bgcolor: 'box.main',
       }}
     >
       <Typography variant="h1" style={{ color: 'white' }}>

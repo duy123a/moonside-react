@@ -1,6 +1,8 @@
 import { PostRequest } from '@/types/postsType';
 import axiosClient from './axiosClient';
 
+// cancelToken Api of axios is deprecated, use AbortController instead
+
 const postApi = {
   getAll(params: URLSearchParams, signal?: AbortSignal) {
     const url = '/posts';

@@ -11,7 +11,7 @@ function App() {
       element: <Dashboard></Dashboard>,
     },
     {
-      path: '/posts',
+      path: '/post',
       element: <></>,
     },
     {

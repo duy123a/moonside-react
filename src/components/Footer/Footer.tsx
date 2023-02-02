@@ -43,7 +43,7 @@ function Footer(props: FooterProps) {
               mb: 2,
             }}
           >
-            <Typography>
+            <Typography sx={{ textAlign: 'center' }}>
               Content is available under{' '}
               <Link href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
                 Creative Commons Attribution-NonCommercial-ShareAlike
