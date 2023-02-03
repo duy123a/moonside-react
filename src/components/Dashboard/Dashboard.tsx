@@ -8,19 +8,10 @@ export default function DashBoard(props: DashBoardProps) {
     <Box
       sx={{
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        minHeight: '90vh',
-        bgcolor: 'box.main',
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 'auto',
       }}
-    >
-      <Typography variant="h6" style={{ color: 'white' }}>
-        May the nightingale's singing follow you into your dream so you can find yourself again.
-      </Typography>
-      <Typography variant="h6" style={{ color: 'white' }}>
-        - The Traveler in your dream, Miss Nightingale.
-      </Typography>
-    </Box>
+    ></Box>
   );
 }

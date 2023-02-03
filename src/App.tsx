@@ -2,17 +2,18 @@ import { useRoutes } from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
+import Post from './features/Post';
 import MainLayout from './layouts/MainLayout';
 
 function App() {
   const elements = useRoutes([
     {
       path: '/',
-      element: <></>,
+      element: <Dashboard></Dashboard>,
     },
     {
       path: '/posts',
-      element: <></>,
+      element: <Post></Post>,
     },
     {
       path: '*',

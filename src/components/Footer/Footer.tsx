@@ -11,12 +11,7 @@ export interface FooterProps {}
 function Footer(props: FooterProps) {
   return (
     <div>
-      <Paper
-        sx={{ position: 'fixed', bottom: 0, width: '100%' }}
-        component="footer"
-        square
-        variant="outlined"
-      >
+      <Paper component="footer" square variant="outlined">
         <Container>
           <Box
             sx={{

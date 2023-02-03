@@ -10,17 +10,19 @@ export default function NotFound(props: NotFoundProps) {
     <Box
       sx={{
         display: 'flex',
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 'auto',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        minHeight: '90vh',
         bgcolor: 'box.main',
       }}
     >
-      <Typography variant="h1" style={{ color: 'white' }}>
+      <Typography variant="h1" sx={{ color: 'text.primary' }}>
         404
       </Typography>
-      <Typography variant="h6" style={{ color: 'white' }}>
+      <Typography variant="h6" sx={{ color: 'text.primary' }}>
         The page you’re looking for doesn’t exist.
       </Typography>
       <Button component={Link} to="/" variant="contained">

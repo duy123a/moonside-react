@@ -25,3 +25,8 @@ export interface PostList {
   data: Post[];
   pagination: Pagination;
 }
+
+export interface SearchParams {
+  _limit?: string | number;
+  _page?: string | number;
+}
