@@ -8,10 +8,10 @@ function App() {
   const elements = useRoutes([
     {
       path: '/',
-      element: <Dashboard></Dashboard>,
+      element: <></>,
     },
     {
-      path: '/post',
+      path: '/posts',
       element: <></>,
     },
     {

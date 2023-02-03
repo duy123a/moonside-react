@@ -29,7 +29,7 @@ function Footer(props: FooterProps) {
           >
             <Typography>
               Created by{' '}
-              <Link href="https://github.com/duy123a/moonside" target="_blank">
+              <Link href="https://github.com/duy123a/moonside" target="_blank" rel="noreferrer">
                 duy123a
               </Link>{' '}
               with <FavoriteIcon fontSize="inherit"></FavoriteIcon>.
@@ -45,7 +45,11 @@ function Footer(props: FooterProps) {
           >
             <Typography sx={{ textAlign: 'center' }}>
               Content is available under{' '}
-              <Link href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+              <Link
+                href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Creative Commons Attribution-NonCommercial-ShareAlike
               </Link>{' '}
               unless otherwise noted.

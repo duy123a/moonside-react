@@ -5,19 +5,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
+import MuiLink from '@mui/material/Link';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 
-const pages = ['Posts'];
+export interface HeaderProps {}
 
-function ResponsiveAppBar() {
-  const theme = useTheme();
+const pages = ['Posts', '404'];
 
+function Header(props: HeaderProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -74,56 +74,64 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{ textDecoration: 'none', color: theme.palette.text.primary }}
-                      to={`/${page.toLowerCase()}`}
-                    >
-                      {page}
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                <MuiLink
+                  key={page}
+                  sx={{ textDecoration: 'none', color: 'text.primary' }}
+                  component={NavLink}
+                  to={`/${page.toLowerCase()}`}
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </MuiLink>
               ))}
             </Menu>
           </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <MuiLink
+                key={page}
+                sx={{ textDecoration: 'none', color: 'text.primary' }}
+                component={NavLink}
+                to={`/${page.toLowerCase()}`}
+              >
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              </MuiLink>
+            ))}
+          </Box>
+
+          <Routes>
+            <Route
+              path="/posts"
+              element={
+                <Button sx={{ mr: 1 }} color="inherit">
+                  Add new post
+                </Button>
+              }
+            ></Route>
+            <Route path="*" element={null}></Route>
+          </Routes>
 
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
             component={Link}
             to="/"
           >
             <HomeIcon />
           </IconButton>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link
-                  style={{ textDecoration: 'none', color: theme.palette.text.primary }}
-                  to={`/${page.toLowerCase()}`}
-                >
-                  {page}
-                </Link>
-              </Button>
-            ))}
-          </Box>
-
-          <Routes>
-            <Route path="/posts" element={<Button color="inherit">Login</Button>}></Route>
-            <Route path="/" element={null}></Route>
-          </Routes>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Header;
