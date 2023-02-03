@@ -14,13 +14,13 @@ export default function SkeletonList({ length = 6 }: SkeletonListProps) {
         {Array.from(new Array(length)).map((x, idx) => (
           <Grid item key={idx} xs={12} sm={6} md={6} lg={4}>
             <Skeleton
-              sx={{ bgcolor: 'grey.900' }}
+              sx={{ bgcolor: 'box.dark' }}
               variant="rectangular"
               width="100%"
               height={118}
             />
-            <Skeleton sx={{ bgcolor: 'grey.900' }} />
-            <Skeleton sx={{ bgcolor: 'grey.900' }} width="60%" />
+            <Skeleton sx={{ bgcolor: 'box.dark' }} />
+            <Skeleton sx={{ bgcolor: 'box.dark' }} width="60%" />
           </Grid>
         ))}
       </Grid>

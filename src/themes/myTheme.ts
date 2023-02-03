@@ -9,6 +9,7 @@ export const darkTheme = createTheme({
     mode: 'dark',
     box: {
       main: 'rgba(0, 0, 0, 0.5)',
+      dark: '#212121',
     },
     primary: {
       main: '#90CAF9',
