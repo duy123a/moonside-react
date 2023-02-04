@@ -6,13 +6,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import * as React from 'react';
 import PostList from '../../components/PostList';
+import TextField from '@mui/material/TextField';
 import Pagination from '@mui/material/Pagination';
+import debounce from 'lodash.debounce';
 
 export interface PostListPageProps {}
 
 export default function PostListPage(props: PostListPageProps) {
   const [postList, setPostList] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [searchValue, setSearchValue] = React.useState('');
 
   // Number of items we want to render
   const quantity = React.useMemo(() => {
@@ -69,6 +72,30 @@ export default function PostListPage(props: PostListPageProps) {
     }));
   };
 
+  // save to useRef due to it will re-create every re-render
+  const debouncedSearch = React.useRef(
+    debounce(async (searchValue: string) => {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        _page: 1,
+        title_like: searchValue,
+      }));
+    }, 500)
+  ).current;
+
+  // Clean debounce search in case unmounting
+  React.useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const target = e.target as HTMLInputElement;
+    setSearchValue(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
   return (
     <Box
       component="main"
@@ -81,13 +108,23 @@ export default function PostListPage(props: PostListPageProps) {
       }}
     >
       <Container sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <Typography variant="h4" sx={{ color: 'text.primary', my: 2 }}>
+        <Typography variant="h4" sx={{ color: 'text.primary', mt: 2 }}>
           Latest posts
         </Typography>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '50%' }}>
+          <TextField
+            fullWidth
+            id="search"
+            label="Search"
+            variant="standard"
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
+        </Box>
+        <Box sx={{ width: '100%', mt: 3 }}>
           {loading ? <SkeletonList length={quantity} /> : <PostList data={postList}></PostList>}
         </Box>
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ my: 2 }}>
           <Pagination
             count={Math.ceil(pagination._totalRows / pagination._limit)}
             page={pagination._page}
