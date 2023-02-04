@@ -10,8 +10,8 @@ export interface FooterProps {}
 
 function Footer(props: FooterProps) {
   return (
-    <div>
-      <Paper component="footer" square variant="outlined">
+    <Box component="footer">
+      <Paper square variant="outlined">
         <Container>
           <Box
             sx={{
@@ -46,13 +46,12 @@ function Footer(props: FooterProps) {
                 rel="noreferrer"
               >
                 Creative Commons Attribution-NonCommercial-ShareAlike
-              </Link>{' '}
-              unless otherwise noted.
+              </Link>
             </Typography>
           </Box>
         </Container>
       </Paper>
-    </div>
+    </Box>
   );
 }
 

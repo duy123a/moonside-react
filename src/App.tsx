@@ -8,12 +8,12 @@ import MainLayout from './layouts/MainLayout';
 function App() {
   const elements = useRoutes([
     {
-      path: '/',
-      element: <Dashboard></Dashboard>,
+      path: '/posts/*',
+      element: <Post></Post>,
     },
     {
-      path: '/posts',
-      element: <Post></Post>,
+      path: '/',
+      element: <Dashboard></Dashboard>,
     },
     {
       path: '*',

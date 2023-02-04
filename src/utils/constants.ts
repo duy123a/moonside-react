@@ -1,4 +1,5 @@
 export enum quantityKind {
-  PC = 6,
-  MOBILE = 3,
+  PC = 3,
+  MOBILE = 2,
+  IPAD = 4,
 }

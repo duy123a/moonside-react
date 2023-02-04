@@ -1,11 +1,11 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 export interface DashBoardProps {}
 
 export default function DashBoard(props: DashBoardProps) {
   return (
     <Box
+      component="main"
       sx={{
         display: 'flex',
         flexGrow: 1,

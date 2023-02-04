@@ -18,7 +18,7 @@ const BackgroundContainer = styled(Box)<BoxProps>(({ theme }) => ({
 
 function MainLayout({ children }: MainLayoutProps) {
   return (
-    <BackgroundContainer sx={{ display: 'flex', flexFlow: 'column', height: '100vh' }}>
+    <BackgroundContainer sx={{ display: 'flex', flexFlow: 'column', minHeight: '100vh' }}>
       <Header></Header>
       {children}
       <Footer></Footer>

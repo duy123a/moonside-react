@@ -29,50 +29,67 @@ function Header(props: HeaderProps) {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}
-            component={Link}
-            to="/"
-          >
-            <HomeIcon />
-          </IconButton>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+    <Box component="header">
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
             <IconButton
               size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              edge="start"
               color="inherit"
+              aria-label="menu"
+              sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}
+              component={Link}
+              to="/"
             >
-              <MenuIcon />
+              <HomeIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {pages.map((page) => (
+                  <MuiLink
+                    key={page}
+                    sx={{ textDecoration: 'none', color: 'text.primary' }}
+                    component={NavLink}
+                    to={`/${page.toLowerCase()}`}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  </MuiLink>
+                ))}
+              </Menu>
+            </Box>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <MuiLink
                   key={page}
@@ -80,58 +97,43 @@ function Header(props: HeaderProps) {
                   component={NavLink}
                   to={`/${page.toLowerCase()}`}
                 >
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page}
+                  </Button>
                 </MuiLink>
               ))}
-            </Menu>
-          </Box>
+            </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <MuiLink
-                key={page}
-                sx={{ textDecoration: 'none', color: 'text.primary' }}
-                component={NavLink}
-                to={`/${page.toLowerCase()}`}
-              >
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              </MuiLink>
-            ))}
-          </Box>
+            <Routes>
+              <Route
+                path="/posts"
+                element={
+                  <Button sx={{ mr: 1 }} color="inherit">
+                    Add new post
+                  </Button>
+                }
+              ></Route>
+              <Route path="*" element={null}></Route>
+            </Routes>
 
-          <Routes>
-            <Route
-              path="/posts"
-              element={
-                <Button sx={{ mr: 1 }} color="inherit">
-                  Add new post
-                </Button>
-              }
-            ></Route>
-            <Route path="*" element={null}></Route>
-          </Routes>
-
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ display: { xs: 'flex', md: 'none' } }}
-            component={Link}
-            to="/"
-          >
-            <HomeIcon />
-          </IconButton>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ display: { xs: 'flex', md: 'none' } }}
+              component={Link}
+              to="/"
+            >
+              <HomeIcon />
+            </IconButton>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </Box>
   );
 }
 export default Header;

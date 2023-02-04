@@ -6,11 +6,11 @@ export interface QuillContent {
 export interface Post {
   id: string;
   author: string;
-  description?: string | Array<QuillContent>;
+  description?: string;
   imageUrl: string;
   title: string;
   createdAt: number;
-  updateAt: number;
+  updatedAt: number;
 }
 
 export type PostRequest = Pick<Post, 'id' | 'author' | 'description' | 'imageUrl' | 'title'>;

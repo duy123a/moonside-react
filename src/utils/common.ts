@@ -1,3 +1,5 @@
+import { quantityKind } from './constants';
+
 export function isMobile() {
   let isMobile = false; //initiate as false
   // device detection
@@ -12,4 +14,22 @@ export function isMobile() {
     isMobile = true;
   }
   return isMobile;
+}
+
+export function calcQuantity() {
+  if (isMobile()) {
+    if (navigator.userAgent.includes('iPad')) {
+      return quantityKind.IPAD;
+    } else {
+      return quantityKind.MOBILE;
+    }
+  } else {
+    return quantityKind.PC;
+  }
+}
+
+export function truncateText(text: string | undefined, maxLength: number) {
+  if (!text) return;
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength)}…`;
 }

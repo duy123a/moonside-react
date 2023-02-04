@@ -8,6 +8,7 @@ export interface NotFoundProps {}
 export default function NotFound(props: NotFoundProps) {
   return (
     <Box
+      component="main"
       sx={{
         display: 'flex',
         flexGrow: 1,
