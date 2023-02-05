@@ -116,6 +116,14 @@ function Header(props: HeaderProps) {
                   </Button>
                 }
               ></Route>
+              <Route
+                path="/posts/:postId"
+                element={
+                  <Button sx={{ mr: 1 }} color="inherit">
+                    Edit post
+                  </Button>
+                }
+              ></Route>
               <Route path="*" element={null}></Route>
             </Routes>
 

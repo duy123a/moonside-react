@@ -63,7 +63,7 @@ export default function PostListPage(props: PostListPageProps) {
       try {
         const { data } = await postApi.getAll(queryParams, controller.signal);
         const { data: postListData, pagination: paginationData } = data;
-        console.log({ postListData, paginationData });
+        // console.log({ postListData, paginationData });
         setPostList(postListData);
         setPagination(paginationData);
         setLoading(false);

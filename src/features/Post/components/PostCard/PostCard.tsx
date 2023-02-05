@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { truncateText } from '@/utils';
+import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
@@ -16,16 +17,27 @@ export interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   // Support Quill module
-  let description: string | undefined = '';
-  if (typeof post.description !== 'string' && typeof post.description !== 'undefined') {
-    description = post.description[0].insert;
-  } else {
-    description = post.description;
+  let description: string = '';
+  if (typeof post.description !== 'undefined') {
+    if (typeof post.description !== 'string') {
+      description = post.description[0].insert;
+    } else {
+      description = post.description;
+    }
   }
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate({
+      pathname: `${location.pathname}/${post.id}`,
+    });
+  };
 
   return (
     <Card sx={{ width: '100%' }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleCardClick}>
         <CardMedia component="img" height="118" image={post.imageUrl} alt={post.title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
