@@ -145,7 +145,8 @@ export default function PostListPage(props: PostListPageProps) {
         display: 'flex',
         flexGrow: 1,
         flexShrink: 1,
-        flexBasis: 'auto',
+        flexBasis: '1px',
+        overflowY: 'scroll',
         bgcolor: 'box.main',
       }}
     >

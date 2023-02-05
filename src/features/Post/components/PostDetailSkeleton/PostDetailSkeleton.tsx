@@ -20,7 +20,7 @@ export default function PostDetailSkeleton(props: PostDetailSkeletonProps) {
     >
       <Box width="100%">
         <Box>
-          <Skeleton sx={{ bgcolor: 'box.dark' }} variant="rectangular" width="100%" height={118} />
+          <Skeleton sx={{ bgcolor: 'box.dark' }} variant="rectangular" width="100%" height={200} />
         </Box>
       </Box>
       <Box width="80%" sx={{ mt: 2 }}>

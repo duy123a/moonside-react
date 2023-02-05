@@ -23,12 +23,14 @@ export default function NotFound(props: NotFoundProps) {
       <Typography variant="h1" sx={{ color: 'text.primary' }}>
         404
       </Typography>
-      <Typography variant="h6" sx={{ color: 'text.primary' }}>
+      <Typography variant="h6" sx={{ color: 'text.primary', textAlign: 'center' }}>
         The page you’re looking for doesn’t exist.
       </Typography>
-      <Button component={Link} to="/" variant="contained">
-        Back Home
-      </Button>
+      <Box mt={2}>
+        <Button component={Link} to="/" variant="contained">
+          Back Home
+        </Button>
+      </Box>
     </Box>
   );
 }
