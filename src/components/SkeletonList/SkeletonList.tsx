@@ -10,9 +10,9 @@ export interface SkeletonListProps {
 export default function SkeletonList({ length = 6 }: SkeletonListProps) {
   return (
     <Box>
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12, lg: 12 }}>
         {Array.from(new Array(length)).map((x, idx) => (
-          <Grid item key={idx} xs={12} sm={6} md={6} lg={4}>
+          <Grid item key={idx} xs={2} sm={4} md={4} lg={4}>
             <Box>
               <Skeleton
                 sx={{ bgcolor: 'box.dark' }}

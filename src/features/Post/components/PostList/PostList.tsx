@@ -11,9 +11,9 @@ export interface PostListProps {
 export default function PostList({ data = [] }: PostListProps) {
   return (
     <Box>
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12, lg: 12 }}>
         {data.map((post) => (
-          <Grid item key={post.id} xs={12} sm={6} md={6} lg={4}>
+          <Grid item key={post.id} xs={2} sm={4} md={4} lg={4}>
             <PostCard post={post}></PostCard>
           </Grid>
         ))}

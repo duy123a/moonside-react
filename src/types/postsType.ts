@@ -1,12 +1,12 @@
 export interface QuillContent {
-  attributes?: Record<string, string>;
+  attributes?: Record<string, string | undefined>;
   insert: string;
 }
 
 export interface Post {
   id: string;
   author: string;
-  description?: string;
+  description?: string | QuillContent[];
   imageUrl: string;
   title: string;
   createdAt: number;
@@ -18,10 +18,10 @@ export type PostRequest = Pick<Post, 'id' | 'author' | 'description' | 'imageUrl
 export interface Pagination {
   _limit: string | number;
   _page: string | number;
-  _totalRow: string | number;
+  _totalRows: string | number;
 }
 
-export interface PostList {
+export interface PostReponse {
   data: Post[];
   pagination: Pagination;
 }
@@ -29,4 +29,5 @@ export interface PostList {
 export interface SearchParams {
   _limit?: string | number;
   _page?: string | number;
+  title_like?: string | number;
 }

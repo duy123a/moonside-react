@@ -15,6 +15,14 @@ export interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
+  // Support Quill module
+  let description: string | undefined = '';
+  if (typeof post.description !== 'string' && typeof post.description !== 'undefined') {
+    description = post.description[0].insert;
+  } else {
+    description = post.description;
+  }
+
   return (
     <Card sx={{ width: '100%' }}>
       <CardActionArea>
@@ -24,7 +32,7 @@ export function PostCard({ post }: PostCardProps) {
             {post.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {truncateText(post.description, 100)}
+            {truncateText(description, 115)}
           </Typography>
           <Typography variant="body2" color="text.secondary" mt={2}>
             {`by ${post.author} - ${dayjs(post.updatedAt).fromNow()}`}
