@@ -16,7 +16,7 @@ export interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
-  // Support Quill module
+  //  Quill compatible (not render on quill styles, this required quill.js)
   let description: string = '';
   if (typeof post.description !== 'undefined') {
     if (typeof post.description !== 'string') {

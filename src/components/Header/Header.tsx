@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 
 export interface HeaderProps {}
 
@@ -27,6 +27,8 @@ function Header(props: HeaderProps) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const location = useLocation();
 
   return (
     <Box component="header">
@@ -111,7 +113,7 @@ function Header(props: HeaderProps) {
               <Route
                 path="/posts"
                 element={
-                  <Button sx={{ mr: 1 }} color="inherit">
+                  <Button component={Link} to="/posts/add" sx={{ mr: 1 }} color="inherit">
                     Add new post
                   </Button>
                 }
@@ -119,11 +121,18 @@ function Header(props: HeaderProps) {
               <Route
                 path="/posts/:postId"
                 element={
-                  <Button sx={{ mr: 1 }} color="inherit">
+                  <Button
+                    component={Link}
+                    to={`/posts/edit/${location.pathname.split('/')[2]}`}
+                    sx={{ mr: 1 }}
+                    color="inherit"
+                  >
                     Edit post
                   </Button>
                 }
               ></Route>
+              <Route path="/posts/add" element={null}></Route>
+              <Route path="/posts/edit" element={null}></Route>
               <Route path="*" element={null}></Route>
             </Routes>
 

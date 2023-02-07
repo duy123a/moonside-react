@@ -1,16 +1,17 @@
 import postApi from '@/apis/postsApi';
+import InputField from '@/components/FormControl/InputField';
 import SkeletonList from '@/components/SkeletonList';
+import { Pagination as PaginationType, Post, SearchParams } from '@/types/postsType';
 import { calcQuantity } from '@/utils';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import debounce from 'lodash.debounce';
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PostList from '../../components/PostList';
-import { SearchParams, Pagination as PaginationType, Post } from '@/types/postsType';
 
 export interface PostListPageProps {}
 
@@ -34,7 +35,6 @@ export default function PostListPage(props: PostListPageProps) {
 
   const [postList, setPostList] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [searchValue, setSearchValue] = React.useState('');
 
   const [pagination, setPagination] = React.useState<PaginationType>({
     _page: 1,
@@ -132,10 +132,18 @@ export default function PostListPage(props: PostListPageProps) {
     };
   }, [debouncedSearch]);
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const form = useForm({
+    defaultValues: {
+      search: '',
+    },
+  });
+
+  const control = form.control;
+
+  const handleSearchChange = () => {
     // const target = e.target as HTMLInputElement;
-    setSearchValue(e.target.value);
-    debouncedSearch(e.target.value);
+    const search = form.getValues('search');
+    debouncedSearch(search);
   };
 
   return (
@@ -155,14 +163,12 @@ export default function PostListPage(props: PostListPageProps) {
           Latest posts
         </Typography>
         <Box sx={{ width: '50%' }}>
-          <TextField
-            fullWidth
-            id="search"
+          <InputField
+            name="search"
             label="Search"
-            variant="standard"
-            value={searchValue}
-            onChange={handleSearchChange}
-          />
+            control={control}
+            customOnChange={handleSearchChange}
+          ></InputField>
         </Box>
         <Box sx={{ width: '100%', mt: 3 }}>
           {loading ? <SkeletonList length={quantity} /> : <PostList data={postList}></PostList>}

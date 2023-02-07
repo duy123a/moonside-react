@@ -12,7 +12,16 @@ export interface PostDetailProps {
 }
 
 export default function PostDetail({ post }: PostDetailProps) {
-  console.log(post);
+  //  Quill compatible (not render on quill styles, this required quill.js)
+  let description: string = '';
+  if (typeof post.description !== 'undefined') {
+    if (typeof post.description !== 'string') {
+      description = post.description[0].insert;
+    } else {
+      description = post.description;
+    }
+  }
+
   return (
     <Box
       component="main"
@@ -42,14 +51,12 @@ export default function PostDetail({ post }: PostDetailProps) {
           </Typography>
           <Divider sx={{ my: 2 }}></Divider>
           <Typography variant="body1" my={1}>
+            {description}
+          </Typography>
+          <Typography variant="body1" my={1}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non totam pariatur quibusdam
             tenetur nemo tempora incidunt ex doloremque exercitationem dicta. Corporis fuga totam
             nulla voluptatibus possimus similique aliquid nobis illo.
-          </Typography>
-          <Typography variant="body1" my={1}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci suscipit inventore
-            hic tenetur, dolor iusto dolorum rem, non error, saepe quia dignissimos quas ducimus
-            aliquid. Praesentium ea aspernatur vero deserunt.
           </Typography>
           <Box
             component="img"
