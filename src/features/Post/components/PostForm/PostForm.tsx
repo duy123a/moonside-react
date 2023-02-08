@@ -8,6 +8,8 @@ import RadioField from '@/components/FormControl/RadioField';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import UploadField from '@/components/FormControl/UploadField';
 
 export interface PostFormProps {
   post?: Post;
@@ -21,9 +23,10 @@ export default function PostForm({ post, onSubmit }: PostFormProps) {
     defaultValues: {
       title: '',
       author: '',
-      bannerUrl: '',
+      image: '',
+      imageUrl: '',
       description: '',
-      banner: '1',
+      imageSource: '1',
     },
   });
 
@@ -45,7 +48,7 @@ export default function PostForm({ post, onSubmit }: PostFormProps) {
         <InputField name="title" label="Title" control={form.control}></InputField>
         <InputField name="author" label="Author" control={form.control}></InputField>
         <Box sx={{ display: 'none' }}>
-          <InputField name="bannerUrl" label="BannerUrl" control={form.control}></InputField>
+          <InputField name="imageUrl" label="imageUrl" control={form.control}></InputField>
         </Box>
         <TextareaField
           name="description"
@@ -56,13 +59,25 @@ export default function PostForm({ post, onSubmit }: PostFormProps) {
           <FormControl>
             <FormLabel>Banner</FormLabel>
             <RadioField
-              name="banner"
+              name="imageSource"
               control={form.control}
               customOnChange={handleRadioChange}
             ></RadioField>
           </FormControl>
         </Box>
-        <Box mt={1}>
+        <Box mt={1} sx={{ display: bannerValue === '1' ? 'block' : 'none' }}>
+          <FormControl>
+            <FormLabel>Image</FormLabel>
+            <Typography>We're using Picsum service to get a random image.</Typography>
+            <Button variant="contained" color="primary">
+              Change post image
+            </Button>
+          </FormControl>
+        </Box>
+        <Box mt={1} sx={{ display: bannerValue === '2' ? 'block' : 'none' }}>
+          <UploadField name="image" control={form.control} label="Upload File"></UploadField>
+        </Box>
+        <Box mt={1} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button variant="contained" color="primary" type="submit" size="large">
             Submit
           </Button>
