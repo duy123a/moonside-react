@@ -3,6 +3,7 @@ import { Control, Controller } from 'react-hook-form';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { RADIO_OPTIONS, IMAGE_SOURCE } from '@/utils';
 
 export interface RadioFieldProps {
   control: Control<any>;
@@ -11,21 +12,10 @@ export interface RadioFieldProps {
   onCustomChange?: (...event: any[]) => void;
 }
 
-const options = [
-  {
-    label: 'Random image using picsums.photos',
-    value: 1,
-  },
-  {
-    label: 'Upload picture from your computer',
-    value: 2,
-  },
-];
-
 export default function RadioField(props: RadioFieldProps) {
   const { control, name, disable = false, onCustomChange = new Function() } = props;
   const generateRadioOptions = () => {
-    return options.map((singleOption) => (
+    return RADIO_OPTIONS.map((singleOption) => (
       <FormControlLabel
         value={singleOption.value}
         key={singleOption.value}
@@ -49,7 +39,7 @@ export default function RadioField(props: RadioFieldProps) {
             onChange(e);
             onCustomChange(e.target.value);
           }}
-          defaultValue={1}
+          defaultValue={IMAGE_SOURCE.PICSUM}
         >
           {generateRadioOptions()}
         </RadioGroup>

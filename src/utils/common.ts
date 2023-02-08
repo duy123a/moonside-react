@@ -1,4 +1,4 @@
-import { quantityKind } from './constants';
+import { QUANTITY_KIND } from './constants';
 
 export function isMobile() {
   let isMobile = false; //initiate as false
@@ -19,12 +19,12 @@ export function isMobile() {
 export function calcQuantity() {
   if (isMobile()) {
     if (navigator.userAgent.includes('iPad')) {
-      return quantityKind.IPAD;
+      return QUANTITY_KIND.IPAD;
     } else {
-      return quantityKind.MOBILE;
+      return QUANTITY_KIND.MOBILE;
     }
   } else {
-    return quantityKind.PC;
+    return QUANTITY_KIND.PC;
   }
 }
 

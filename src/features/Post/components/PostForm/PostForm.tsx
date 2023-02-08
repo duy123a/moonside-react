@@ -9,7 +9,10 @@ import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import * as React from 'react';
+import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
+import { IMAGE_SOURCE } from '@/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export interface PostFormProps {
   post?: Post;
@@ -18,7 +21,47 @@ export interface PostFormProps {
 }
 
 export default function PostForm({ post, onSubmit, onBannerChange }: PostFormProps) {
-  const [bannerValue, setBannerValue] = React.useState('1');
+  const [imageSourceValue, setImageSourceValue] = React.useState(IMAGE_SOURCE.PICSUM);
+
+  const schema = yup
+    .object({
+      title: yup.string().required('Please enter title'),
+      author: yup
+        .string()
+        .required('Please enter author')
+        .test(
+          'at least two word',
+          'Please enter at least two words with three characters',
+          (value: string | undefined) => {
+            if (!value) return false;
+            return value.split(' ').filter((x: string) => !!x && x.length >= 3).length >= 2;
+          }
+        ),
+      description: yup.string(),
+      imageSource: yup
+        .string()
+        .required('Please enter image source')
+        .oneOf([IMAGE_SOURCE.PICSUM, IMAGE_SOURCE.UPLOAD], 'Invalid image source'),
+      imageUrl: yup.string().when('imageSource', {
+        is: IMAGE_SOURCE.PICSUM,
+        then: yup
+          .string()
+          .required('Please random a background image')
+          .url('Please enter a valid url'),
+      }),
+      image: yup.mixed().when('imageSource', {
+        is: IMAGE_SOURCE.UPLOAD,
+        then: yup
+          .mixed()
+          .test('required', 'Please select an image to upload', (file: File) => Boolean(file?.name))
+          .test('max-3mb', 'The image is too large (max 3mb)', (file: File) => {
+            const fileSize = file?.size || 0;
+            const maxSize = 3 * 1024 * 1024;
+            return fileSize <= maxSize;
+          }),
+      }),
+    })
+    .required();
 
   const form = useForm({
     defaultValues: {
@@ -27,12 +70,13 @@ export default function PostForm({ post, onSubmit, onBannerChange }: PostFormPro
       image: '',
       imageUrl: '',
       description: '',
-      imageSource: '1',
+      imageSource: IMAGE_SOURCE.PICSUM,
     },
+    resolver: yupResolver(schema),
   });
 
-  const handleRadioChange = (value: string) => {
-    setBannerValue(value);
+  const handleRadioChange = (value: IMAGE_SOURCE) => {
+    setImageSourceValue(value);
   };
 
   const handleRandomImageChange = (imageUrl: string) => {
@@ -68,7 +112,7 @@ export default function PostForm({ post, onSubmit, onBannerChange }: PostFormPro
             ></RadioField>
           </FormControl>
         </Box>
-        <Box mt={1} sx={{ display: bannerValue === '1' ? 'block' : 'none' }}>
+        <Box mt={1} sx={{ display: imageSourceValue === IMAGE_SOURCE.PICSUM ? 'block' : 'none' }}>
           <RandomImageField
             name="imageUrl"
             control={form.control}
@@ -76,7 +120,7 @@ export default function PostForm({ post, onSubmit, onBannerChange }: PostFormPro
             onCustomChange={handleRandomImageChange}
           ></RandomImageField>
         </Box>
-        <Box mt={1} sx={{ display: bannerValue === '2' ? 'block' : 'none' }}>
+        <Box mt={1} sx={{ display: imageSourceValue === IMAGE_SOURCE.UPLOAD ? 'block' : 'none' }}>
           <UploadField name="image" control={form.control} label="Upload File"></UploadField>
         </Box>
         <Box mt={1} sx={{ display: 'flex', justifyContent: 'center' }}>
