@@ -1,4 +1,4 @@
-import { QUANTITY_KIND } from './constants';
+import { QUANTITY_KIND, IMAGE_SOURCE } from './constants';
 
 export function isMobile() {
   let isMobile = false; //initiate as false
@@ -39,3 +39,25 @@ export function randomNumber(n: number) {
   const random = Math.random() * n;
   return Math.round(random);
 }
+
+export function jsonToFormData(jsonObject: Record<string, any>) {
+  const formData = new FormData();
+  for (const key in jsonObject) {
+    formData.set(key, jsonObject[key]);
+  }
+  return formData;
+}
+
+export const removeUnusedFields = (formValues: Record<string, any>) => {
+  const payload = { ...formValues };
+  if (payload.imageSource === IMAGE_SOURCE.UPLOAD) {
+    delete payload.imageUrl;
+  } else {
+    delete payload.image;
+  }
+
+  if (!payload.id) delete payload.id;
+
+  delete payload.imageSource;
+  return payload;
+};

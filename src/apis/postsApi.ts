@@ -1,4 +1,4 @@
-import { PostRequest, SearchParams, PostReponse, Post } from '@/types/postsType';
+import { SearchParams, PostReponse, Post } from '@/types/postsType';
 import axiosClient from './axiosClient';
 
 // cancelToken Api of axios is deprecated, use AbortController instead
@@ -17,11 +17,11 @@ const postApi = {
     return axiosClient.delete<{}>(url, { signal });
   },
   // JSON data
-  add(data: PostRequest, signal?: AbortSignal) {
+  add(data: Record<string, any>, signal?: AbortSignal) {
     const url = '/posts';
     return axiosClient.post<Post>(url, data, { signal });
   },
-  update(data: PostRequest, signal?: AbortSignal) {
+  update(data: Record<string, any>, signal?: AbortSignal) {
     const url = `/posts/${data.id}`;
     return axiosClient.patch<Post>(url, data, { signal });
   },

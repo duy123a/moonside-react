@@ -5,17 +5,50 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import PostForm from '../../components/PostForm';
+import { IMAGE_SOURCE, jsonToFormData, removeUnusedFields } from '@/utils';
+import postApi from '@/apis/postsApi';
+import { useNavigate } from 'react-router-dom';
 
 export interface PostAddPageProps {}
 
 export default function PostAddPage(props: PostAddPageProps) {
+  const navigate = useNavigate();
   const [bannerImage, setBannerImage] = React.useState('');
-  const handleSubmit = async (values: any) => {
+
+  const timeOutId = React.useRef(0);
+
+  const handleSubmit = async (values: Record<string, any>) => {
     console.log(values);
+    try {
+      const payload = removeUnusedFields(values);
+      console.log(payload);
+      let savedPost = {};
+      if (payload.imageUrl) {
+        savedPost = await postApi.add(payload);
+      } else {
+        const formData = jsonToFormData(payload);
+        savedPost = await postApi.addFormData(formData);
+      }
+      // redirect to main page, we can clean this one but it's fine if we don't clean too
+      // timeOutId.current = setTimeout(() => {
+      //   navigate('/posts');
+      // }, 3000);
+    } catch (error) {
+      console.log('Failed to add post', error);
+    }
   };
+
+  React.useEffect(() => {
+    // clean the time out
+    return () => {
+      clearTimeout(timeOutId.current);
+    };
+  }, []);
+
   const handleBannerImage = (imageUrl: string) => {
     setBannerImage(imageUrl);
   };
+
   return (
     <Box
       component="main"

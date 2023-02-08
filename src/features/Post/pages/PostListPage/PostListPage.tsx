@@ -167,7 +167,7 @@ export default function PostListPage(props: PostListPageProps) {
             name="search"
             label="Search"
             control={control}
-            customOnChange={handleSearchChange}
+            onCustomChange={handleSearchChange}
           ></InputField>
         </Box>
         <Box sx={{ width: '100%', mt: 3 }}>

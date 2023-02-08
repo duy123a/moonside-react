@@ -13,8 +13,6 @@ export interface Post {
   updatedAt: number;
 }
 
-export type PostRequest = Pick<Post, 'id' | 'author' | 'description' | 'imageUrl' | 'title'>;
-
 export interface Pagination {
   _limit: string | number;
   _page: string | number;

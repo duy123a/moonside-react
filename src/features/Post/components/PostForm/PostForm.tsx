@@ -86,7 +86,7 @@ export default function PostForm({ post, onSubmit, onBannerChange }: PostFormPro
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: Record<string, any>) => {
     if (onSubmit) {
       await onSubmit(values);
     }
