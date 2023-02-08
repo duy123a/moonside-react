@@ -33,3 +33,9 @@ export function truncateText(text: string | undefined, maxLength: number) {
   if (text.length <= maxLength) return text;
   return `${text.slice(0, maxLength)}…`;
 }
+
+export function randomNumber(n: number) {
+  if (n <= 0) return -1;
+  const random = Math.random() * n;
+  return Math.round(random);
+}

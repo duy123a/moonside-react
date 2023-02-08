@@ -9,12 +9,12 @@ import PostForm from '../../components/PostForm';
 export interface PostAddPageProps {}
 
 export default function PostAddPage(props: PostAddPageProps) {
-  const heroImageRef = React.useRef(null);
-  React.useEffect(() => {
-    console.log(heroImageRef.current);
-  }, []);
+  const [bannerImage, setBannerImage] = React.useState('');
   const handleSubmit = async (values: any) => {
     console.log(values);
+  };
+  const handleBannerImage = (imageUrl: string) => {
+    setBannerImage(imageUrl);
   };
   return (
     <Box
@@ -31,11 +31,15 @@ export default function PostAddPage(props: PostAddPageProps) {
       }}
     >
       <Box
-        ref={heroImageRef}
         width="100%"
         height={200}
         minHeight={200}
-        sx={{ display: 'flex', backgroundColor: 'background.paper' }}
+        sx={{
+          display: 'flex',
+          backgroundColor: 'background.paper',
+          backgroundImage: `url("${bannerImage}")`,
+          backgroundSize: 'cover',
+        }}
       ></Box>
       <Container>
         <Paper sx={{ px: 3, py: 4, mt: -5 }}>
@@ -44,7 +48,7 @@ export default function PostAddPage(props: PostAddPageProps) {
             Please enter the following information and submit then.
           </Typography>
           <Divider sx={{ my: 2 }}></Divider>
-          <PostForm onSubmit={handleSubmit}></PostForm>
+          <PostForm onSubmit={handleSubmit} onBannerChange={handleBannerImage}></PostForm>
         </Paper>
       </Container>
     </Box>

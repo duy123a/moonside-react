@@ -1,22 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { Post } from '@/types/postsType';
-import { useForm } from 'react-hook-form';
 import InputField from '@/components/FormControl/InputField';
-import TextareaField from '@/components/FormControl/TextareaField';
 import RadioField from '@/components/FormControl/RadioField';
+import RandomImageField from '@/components/FormControl/RandomImageField';
+import TextareaField from '@/components/FormControl/TextareaField';
+import UploadField from '@/components/FormControl/UploadField';
+import { Post } from '@/types/postsType';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import UploadField from '@/components/FormControl/UploadField';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
 export interface PostFormProps {
   post?: Post;
   onSubmit?: (...event: any[]) => void;
+  onBannerChange?: (...event: any[]) => void;
 }
 
-export default function PostForm({ post, onSubmit }: PostFormProps) {
+export default function PostForm({ post, onSubmit, onBannerChange }: PostFormProps) {
   const [bannerValue, setBannerValue] = React.useState('1');
 
   const form = useForm({
@@ -34,22 +35,24 @@ export default function PostForm({ post, onSubmit }: PostFormProps) {
     setBannerValue(value);
   };
 
+  const handleRandomImageChange = (imageUrl: string) => {
+    form.setValue('imageUrl', imageUrl);
+    if (onBannerChange) {
+      onBannerChange(imageUrl);
+    }
+  };
+
   const handleSubmit = async (values: any) => {
     if (onSubmit) {
       await onSubmit(values);
     }
   };
 
-  console.log('Banner value realtime', bannerValue);
-
   return (
     <Box>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="title" label="Title" control={form.control}></InputField>
         <InputField name="author" label="Author" control={form.control}></InputField>
-        <Box sx={{ display: 'none' }}>
-          <InputField name="imageUrl" label="imageUrl" control={form.control}></InputField>
-        </Box>
         <TextareaField
           name="description"
           label="Description"
@@ -57,22 +60,21 @@ export default function PostForm({ post, onSubmit }: PostFormProps) {
         ></TextareaField>
         <Box mt={1}>
           <FormControl>
-            <FormLabel>Banner</FormLabel>
+            <FormLabel>Banner Image</FormLabel>
             <RadioField
               name="imageSource"
               control={form.control}
-              customOnChange={handleRadioChange}
+              onCustomChange={handleRadioChange}
             ></RadioField>
           </FormControl>
         </Box>
         <Box mt={1} sx={{ display: bannerValue === '1' ? 'block' : 'none' }}>
-          <FormControl>
-            <FormLabel>Image</FormLabel>
-            <Typography>We're using Picsum service to get a random image.</Typography>
-            <Button variant="contained" color="primary">
-              Change post image
-            </Button>
-          </FormControl>
+          <RandomImageField
+            name="imageUrl"
+            control={form.control}
+            label="Image"
+            onCustomChange={handleRandomImageChange}
+          ></RandomImageField>
         </Box>
         <Box mt={1} sx={{ display: bannerValue === '2' ? 'block' : 'none' }}>
           <UploadField name="image" control={form.control} label="Upload File"></UploadField>

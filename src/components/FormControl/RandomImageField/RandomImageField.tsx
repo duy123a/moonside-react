@@ -2,11 +2,14 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-import { Control, Controller } from 'react-hook-form';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Control, Controller } from 'react-hook-form';
+import FormLabel from '@mui/material/FormLabel';
+import Typography from '@mui/material/Typography';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { randomNumber } from '@/utils';
 
-export interface UploadFieldProps {
+export interface RandomImageFieldProps {
   control: Control<any>;
   name: string;
   label: string;
@@ -14,17 +17,11 @@ export interface UploadFieldProps {
   onCustomChange?: (...event: any[]) => void;
 }
 
-export default function UploadField(props: UploadFieldProps) {
+export default function RandomImageField(props: RandomImageFieldProps) {
   const { control, name, label, disable = false, onCustomChange = new Function() } = props;
-  const [fileName, setFileName] = React.useState('');
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-    const file = e.target.files[0];
-    console.log(file);
-    const { name } = file;
-    setFileName(name);
+  const handleRandomButtonClick = () => {
+    const imageUrl = `https://picsum.photos/id/${randomNumber(1000)}/1368/400`;
+    onCustomChange(imageUrl);
   };
   return (
     <Controller
@@ -36,22 +33,19 @@ export default function UploadField(props: UploadFieldProps) {
         formState,
       }) => (
         <FormControl error={!!error}>
-          <Button variant="contained" component="label">
-            {label}
-            <input
-              name={name}
-              value={value}
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                onChange(e);
-                handleFileUpload(e);
-              }}
-              hidden
-            ></input>
-          </Button>
+          <Typography>We're using Picsum service to get a random image.</Typography>
           <Box mt={1}>
-            <Typography sx={{ display: 'inline' }}>{fileName}</Typography>
+            <Button variant="contained" color="primary" onClick={handleRandomButtonClick}>
+              Change post image
+            </Button>
+          </Box>
+          <OutlinedInput
+            name={name}
+            value={value}
+            onChange={onChange}
+            sx={{ display: 'none' }}
+          ></OutlinedInput>
+          <Box mt={1}>
             <FormHelperText>{error?.message}</FormHelperText>
           </Box>
         </FormControl>

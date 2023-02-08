@@ -7,11 +7,11 @@ export interface InputFieldProps {
   name: string;
   label: string;
   disable?: boolean;
-  customOnChange?: (...event: any[]) => void;
+  onCustomChange?: (...event: any[]) => void;
 }
 
 export default function InputField(props: InputFieldProps) {
-  const { control, name, label, disable = false, customOnChange = new Function() } = props;
+  const { control, name, label, disable = false, onCustomChange = new Function() } = props;
   return (
     <Controller
       control={control}
@@ -30,7 +30,7 @@ export default function InputField(props: InputFieldProps) {
           helperText={error?.message}
           onChange={(e) => {
             onChange(e);
-            customOnChange();
+            onCustomChange();
           }}
           onBlur={onBlur}
           name={name}

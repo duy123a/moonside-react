@@ -8,7 +8,7 @@ export interface RadioFieldProps {
   control: Control<any>;
   name: string;
   disable?: boolean;
-  customOnChange?: (...event: any[]) => void;
+  onCustomChange?: (...event: any[]) => void;
 }
 
 const options = [
@@ -23,7 +23,7 @@ const options = [
 ];
 
 export default function RadioField(props: RadioFieldProps) {
-  const { control, name, disable = false, customOnChange = new Function() } = props;
+  const { control, name, disable = false, onCustomChange = new Function() } = props;
   const generateRadioOptions = () => {
     return options.map((singleOption) => (
       <FormControlLabel
@@ -47,7 +47,7 @@ export default function RadioField(props: RadioFieldProps) {
           value={value}
           onChange={(e) => {
             onChange(e);
-            customOnChange(e.target.value);
+            onCustomChange(e.target.value);
           }}
           defaultValue={1}
         >
