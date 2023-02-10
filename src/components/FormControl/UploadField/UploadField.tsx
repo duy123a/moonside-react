@@ -16,7 +16,6 @@ export interface UploadFieldProps {
 
 export default function UploadField(props: UploadFieldProps) {
   const { control, name, label, disable = false, onCustomChange = new Function() } = props;
-  const { field } = useController({ control, name });
   const [fileName, setFileName] = React.useState('');
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -44,7 +43,7 @@ export default function UploadField(props: UploadFieldProps) {
               onChange={(e) => {
                 handleFileUpload(e);
                 if (e.target.files) {
-                  field.onChange(e.target.files[0]);
+                  onChange(e.target.files[0]);
                 }
               }}
               hidden

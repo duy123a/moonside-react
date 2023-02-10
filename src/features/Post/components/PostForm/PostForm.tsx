@@ -65,11 +65,11 @@ export default function PostForm({ post, onSubmit, onBannerChange }: PostFormPro
 
   const form = useForm({
     defaultValues: {
-      title: '',
-      author: '',
+      title: post?.title || '',
+      author: post?.author || '',
       image: '',
-      imageUrl: '',
-      description: '',
+      imageUrl: post?.imageUrl || '',
+      description: post?.description || '',
       imageSource: IMAGE_SOURCE.PICSUM,
     },
     resolver: yupResolver(schema),

@@ -1,4 +1,5 @@
 import postApi from '@/apis/postsApi';
+import { Post } from '@/types/postsType';
 import { jsonToFormData, removeUnusedFields } from '@/utils';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -9,30 +10,33 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostForm from '../../components/PostForm';
 
-export interface PostAddPageProps {}
+export interface PostEditProps {
+  post: Post;
+}
 
-export default function PostAddPage(props: PostAddPageProps) {
+export default function PostEdit({ post }: PostEditProps) {
   const navigate = useNavigate();
-  const [bannerImage, setBannerImage] = React.useState('');
+  const [bannerImage, setBannerImage] = React.useState(post?.imageUrl);
 
   const timeOutId = React.useRef(0);
 
   const handleSubmit = async (values: Record<string, any>) => {
     try {
       const payload = removeUnusedFields(values);
+      payload.id = post.id;
       let savedPost: any = {};
       if (payload.imageUrl) {
-        savedPost = await postApi.add(payload);
+        savedPost = await postApi.update(payload);
       } else {
         const formData = jsonToFormData(payload);
-        savedPost = await postApi.addFormData(formData);
+        savedPost = await postApi.updateFormData(formData);
       }
       // redirect to main page, we can clean this one but it's fine if we don't clean too
       timeOutId.current = setTimeout(() => {
         navigate(`/posts/${savedPost.data.id}`);
       }, 3000);
     } catch (error) {
-      console.log('Failed to add post', error);
+      console.log('Failed to edit post', error);
     }
   };
 
@@ -74,12 +78,16 @@ export default function PostAddPage(props: PostAddPageProps) {
       ></Box>
       <Container>
         <Paper sx={{ px: 3, py: 4, mt: -5 }}>
-          <Typography variant="h4">Add a post</Typography>
+          <Typography variant="h4">Edit a post</Typography>
           <Typography variant="body2" color="text.secondary" mt={2}>
             Please enter the following information and submit then.
           </Typography>
           <Divider sx={{ my: 2 }}></Divider>
-          <PostForm onSubmit={handleSubmit} onBannerChange={handleBannerImage}></PostForm>
+          <PostForm
+            post={post}
+            onSubmit={handleSubmit}
+            onBannerChange={handleBannerImage}
+          ></PostForm>
         </Paper>
       </Container>
     </Box>
