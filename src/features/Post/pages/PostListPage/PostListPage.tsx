@@ -2,7 +2,7 @@ import postApi from '@/apis/postsApi';
 import InputField from '@/components/FormControl/InputField';
 import SkeletonList from '@/components/SkeletonList';
 import { Pagination as PaginationType, Post, SearchParams } from '@/types/postsType';
-import { calcQuantity } from '@/utils';
+import { calcQuantity, RerenderContext } from '@/utils';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Pagination from '@mui/material/Pagination';
@@ -35,6 +35,11 @@ export default function PostListPage(props: PostListPageProps) {
 
   const [postList, setPostList] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [rerender, setRerender] = React.useState(false);
+
+  const rerendering = () => {
+    setRerender((prevState) => !prevState);
+  };
 
   const [pagination, setPagination] = React.useState<PaginationType>({
     _page: 1,
@@ -87,7 +92,7 @@ export default function PostListPage(props: PostListPageProps) {
 
     // clean up function when unmounted to avoid getData fired twice in React Strict Mode (v18)
     return () => controller.abort();
-  }, [queryParams]);
+  }, [queryParams, rerender]);
 
   const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
     // setFilters((prevFilters) => ({
@@ -147,40 +152,42 @@ export default function PostListPage(props: PostListPageProps) {
   };
 
   return (
-    <Box
-      component="main"
-      sx={{
-        display: 'flex',
-        flexGrow: 1,
-        flexShrink: 1,
-        flexBasis: '1px',
-        overflowY: 'scroll',
-        bgcolor: 'box.main',
-      }}
-    >
-      <Container sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <Typography variant="h4" sx={{ color: 'text.primary', mt: 2 }}>
-          Latest posts
-        </Typography>
-        <Box sx={{ width: '50%' }}>
-          <InputField
-            name="search"
-            label="Search"
-            control={control}
-            onCustomChange={handleSearchChange}
-          ></InputField>
-        </Box>
-        <Box sx={{ width: '100%', mt: 3 }}>
-          {loading ? <SkeletonList length={quantity} /> : <PostList data={postList}></PostList>}
-        </Box>
-        <Box sx={{ my: 2 }}>
-          <Pagination
-            count={Math.ceil((pagination._totalRows as number) / (pagination._limit as number))}
-            page={pagination._page as number}
-            onChange={handlePageChange}
-          />
-        </Box>
-      </Container>
-    </Box>
+    <RerenderContext.Provider value={rerendering}>
+      <Box
+        component="main"
+        sx={{
+          display: 'flex',
+          flexGrow: 1,
+          flexShrink: 1,
+          flexBasis: '1px',
+          overflowY: 'scroll',
+          bgcolor: 'box.main',
+        }}
+      >
+        <Container sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <Typography variant="h4" sx={{ color: 'text.primary', mt: 2 }}>
+            Latest posts
+          </Typography>
+          <Box sx={{ width: '50%' }}>
+            <InputField
+              name="search"
+              label="Search"
+              control={control}
+              onCustomChange={handleSearchChange}
+            ></InputField>
+          </Box>
+          <Box sx={{ width: '100%', mt: 3 }}>
+            {loading ? <SkeletonList length={quantity} /> : <PostList data={postList}></PostList>}
+          </Box>
+          <Box sx={{ my: 2 }}>
+            <Pagination
+              count={Math.ceil((pagination._totalRows as number) / (pagination._limit as number))}
+              page={pagination._page as number}
+              onChange={handlePageChange}
+            />
+          </Box>
+        </Container>
+      </Box>
+    </RerenderContext.Provider>
   );
 }

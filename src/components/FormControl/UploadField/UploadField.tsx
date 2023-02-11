@@ -34,21 +34,23 @@ export default function UploadField(props: UploadFieldProps) {
         formState,
       }) => (
         <FormControl error={!!error}>
-          <Button variant="contained" component="label">
-            {label}
-            <input
-              name={name}
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                handleFileUpload(e);
-                if (e.target.files) {
-                  onChange(e.target.files[0]);
-                }
-              }}
-              hidden
-            ></input>
-          </Button>
+          <Box>
+            <Button variant="contained" component="label">
+              {label}
+              <input
+                name={name}
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  handleFileUpload(e);
+                  if (e.target.files) {
+                    onChange(e.target.files[0]);
+                  }
+                }}
+                hidden
+              ></input>
+            </Button>
+          </Box>
           <Box mt={1}>
             <Typography sx={{ display: 'inline' }}>{fileName}</Typography>
             <FormHelperText>{error?.message}</FormHelperText>
