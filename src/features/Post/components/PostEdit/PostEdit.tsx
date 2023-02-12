@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import PostForm from '../../components/PostForm';
 
 export interface PostEditProps {
@@ -16,6 +17,7 @@ export interface PostEditProps {
 
 export default function PostEdit({ post }: PostEditProps) {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [bannerImage, setBannerImage] = React.useState(post?.imageUrl);
 
   const timeOutId = React.useRef(0);
@@ -31,12 +33,19 @@ export default function PostEdit({ post }: PostEditProps) {
         const formData = jsonToFormData(payload);
         savedPost = await postApi.updateFormData(formData);
       }
+      // show noti
+      enqueueSnackbar('Edit post successfully!', { variant: 'success' });
       // redirect to main page, we can clean this one but it's fine if we don't clean too
       timeOutId.current = setTimeout(() => {
         navigate(`/posts/${savedPost.data.id}`);
       }, 3000);
     } catch (error) {
-      console.log('Failed to edit post', error);
+      if (error instanceof Error) {
+        enqueueSnackbar(`Failed to edit post: ${error.message}`, { variant: 'error' });
+        console.log('Failed to edit post', error);
+      } else {
+        console.log('Unknown error');
+      }
     }
   };
 

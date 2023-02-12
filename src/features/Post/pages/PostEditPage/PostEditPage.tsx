@@ -5,11 +5,13 @@ import postApi from '@/apis/postsApi';
 import PostDetailSkeleton from '../../components/PostDetailSkeleton';
 import NotFound from '@/components/NotFound';
 import PostEdit from '../../components/PostEdit';
+import { useSnackbar } from 'notistack';
 
 export interface PostEditPageProps {}
 
 export default function PostEditPage(props: PostEditPageProps) {
   const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
@@ -35,6 +37,7 @@ export default function PostEditPage(props: PostEditPageProps) {
         if (error instanceof Error) {
           if (error.name !== 'CanceledError') {
             /* Logic for non-aborted error handling goes here. */
+            enqueueSnackbar(`Failed to fetch post: ${error.message}`, { variant: 'error' });
             console.log('failed to fetch post', error);
             setLoading(false);
           }

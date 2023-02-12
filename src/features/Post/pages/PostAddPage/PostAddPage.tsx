@@ -1,5 +1,6 @@
 import postApi from '@/apis/postsApi';
 import { jsonToFormData, removeUnusedFields } from '@/utils';
+import { useSnackbar } from 'notistack';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
@@ -17,6 +18,8 @@ export default function PostAddPage(props: PostAddPageProps) {
 
   const timeOutId = React.useRef(0);
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleSubmit = async (values: Record<string, any>) => {
     try {
       const payload = removeUnusedFields(values);
@@ -27,12 +30,19 @@ export default function PostAddPage(props: PostAddPageProps) {
         const formData = jsonToFormData(payload);
         savedPost = await postApi.addFormData(formData);
       }
+      // show noti
+      enqueueSnackbar('Create post successfully!', { variant: 'success' });
       // redirect to main page, we can clean this one but it's fine if we don't clean too
       timeOutId.current = setTimeout(() => {
         navigate(`/posts/${savedPost.data.id}`);
       }, 3000);
     } catch (error) {
-      console.log('Failed to add post', error);
+      if (error instanceof Error) {
+        enqueueSnackbar(`Failed to create post: ${error.message}`, { variant: 'error' });
+        console.log('Failed to create post', error);
+      } else {
+        console.log('Unknown error');
+      }
     }
   };
 

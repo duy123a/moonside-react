@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import debounce from 'lodash.debounce';
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PostList from '../../components/PostList';
 
@@ -23,6 +24,7 @@ export default function PostListPage(props: PostListPageProps) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const queryParams: SearchParams = React.useMemo(() => {
     const params = Object.fromEntries(new URLSearchParams(location.search));
@@ -76,6 +78,7 @@ export default function PostListPage(props: PostListPageProps) {
         if (error instanceof Error) {
           if (error.name !== 'CanceledError') {
             /* Logic for non-aborted error handling goes here. */
+            enqueueSnackbar(`Failed to fetch post list: ${error.message}`, { variant: 'error' });
             console.log('failed to fetch post list', error);
             setLoading(false);
           }

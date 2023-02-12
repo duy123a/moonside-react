@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { CardActionArea, CardActions } from '@mui/material';
 import { RerenderContext, truncateText } from '@/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import postApi from '@/apis/postsApi';
@@ -35,6 +36,7 @@ export function PostCard({ post }: PostCardProps) {
   }
 
   const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -65,9 +67,16 @@ export function PostCard({ post }: PostCardProps) {
     try {
       await postApi.remove(postId);
       setOpen(false);
+      // show noti
+      enqueueSnackbar('Delete post successfully!', { variant: 'success' });
       rerendering();
     } catch (error) {
-      console.log('failed to delete post', error);
+      if (error instanceof Error) {
+        enqueueSnackbar(`Failed to delete post: ${error.message}`, { variant: 'error' });
+        console.log('failed to delete post', error);
+      } else {
+        console.log('Unknown error');
+      }
     }
   };
 
