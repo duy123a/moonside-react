@@ -1,4 +1,4 @@
-import imageUrl from '@/assets/dashboard.png';
+import imageUrl from '@/assets/dashboard.jpg';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Box, { BoxProps } from '@mui/material/Box';
