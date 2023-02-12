@@ -24,7 +24,7 @@ export interface PostCardProps {
   post: Post;
 }
 
-export function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post }: PostCardProps) {
   //  Quill compatible (not render on quill styles, this required quill.js)
   let description: string = '';
   if (typeof post.description !== 'undefined') {
