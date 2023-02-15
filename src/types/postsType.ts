@@ -27,5 +27,5 @@ export interface PostReponse {
 export interface SearchParams {
   _limit?: string | number;
   _page?: string | number;
-  title_like?: string | number;
+  title_like?: string;
 }
