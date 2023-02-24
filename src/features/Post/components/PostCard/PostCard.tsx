@@ -81,7 +81,7 @@ export default function PostCard({ post }: PostCardProps) {
   };
 
   return (
-    <Box>
+    <Box aria-label="postCard">
       <Card sx={{ width: '100%' }}>
         <CardActionArea onClick={handleCardClick}>
           <CardMedia component="img" height="118" image={post.imageUrl} alt={post.title} />

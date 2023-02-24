@@ -39,7 +39,7 @@ function Header(props: HeaderProps) {
               size="large"
               edge="start"
               color="inherit"
-              aria-label="menu"
+              aria-label="homeButton"
               sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}
               component={Link}
               to="/"
