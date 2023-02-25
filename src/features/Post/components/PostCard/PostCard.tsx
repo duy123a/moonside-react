@@ -18,7 +18,7 @@ import { useSnackbar } from 'notistack';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import postApi from '@/apis/postsApi';
-dayjs.extend(relativeTime);
+dayjs?.extend(relativeTime);
 
 export interface PostCardProps {
   post: Post;
@@ -93,7 +93,7 @@ export default function PostCard({ post }: PostCardProps) {
               {truncateText(description, 115)}
             </Typography>
             <Typography variant="body2" color="text.secondary" mt={2}>
-              {`by ${post.author} - ${dayjs(post.updatedAt).fromNow()}`}
+              {`by ${post.author} - ${dayjs?.(post.updatedAt)?.fromNow()}`}
             </Typography>
           </CardContent>
         </CardActionArea>

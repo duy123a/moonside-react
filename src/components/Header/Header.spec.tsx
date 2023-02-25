@@ -22,7 +22,7 @@ it('show add new post button at localhost/posts', () => {
       <Header></Header>
     </MemoryRouter>
   );
-  const addButton = screen.getByText(/Add new post/i);
+  const addButton = screen.getByText(/add new post/i);
   expect(addButton).toBeInTheDocument();
 });
 
@@ -32,6 +32,6 @@ it('show edit post button at localhost/posts/:postId', () => {
       <Header></Header>
     </MemoryRouter>
   );
-  const editButton = screen.getByText(/Edit post/i);
+  const editButton = screen.getByText(/edit post/i);
   expect(editButton).toBeInTheDocument();
 });
