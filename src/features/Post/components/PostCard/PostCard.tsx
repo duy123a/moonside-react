@@ -15,8 +15,8 @@ import { CardActionArea, CardActions } from '@mui/material';
 import { RerenderContext, truncateText } from '@/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import * as dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
 import postApi from '@/apis/postsApi';
 dayjs.extend(relativeTime);
 
