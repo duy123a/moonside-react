@@ -33,7 +33,7 @@ export default function PostAddPage(props: PostAddPageProps) {
       // show noti
       enqueueSnackbar('Create post successfully!', { variant: 'success' });
       // redirect to main page, we can clean this one but it's fine if we don't clean too
-      timeOutId.current = setTimeout(() => {
+      timeOutId.current = window.setTimeout(() => {
         navigate(`/posts/${savedPost.data.id}`);
       }, 3000);
     } catch (error) {
