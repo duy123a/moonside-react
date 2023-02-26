@@ -20,7 +20,7 @@ export default function NotFound(props: NotFoundProps) {
         bgcolor: 'box.main',
       }}
     >
-      <Typography variant="h1" sx={{ color: 'text.primary' }}>
+      <Typography variant="h1" sx={{ color: 'text.primary', textAlign: 'center' }}>
         404
       </Typography>
       <Typography variant="h6" sx={{ color: 'text.primary', textAlign: 'center' }}>

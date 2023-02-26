@@ -5,4 +5,7 @@ export default {
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
   },
+  transform: {
+    '.+\\.(css|styl|less|sass|scss|png|jpg|webp|ttf|woff|woff2)$': 'jest-transform-stub',
+  },
 };
