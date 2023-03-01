@@ -6,11 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import { CardActionArea, CardActions } from '@mui/material';
 import { RerenderContext, truncateText } from '@/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,6 +13,7 @@ import { useSnackbar } from 'notistack';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import postApi from '@/apis/postsApi';
+import PostModal from '../PostModal';
 dayjs.extend(relativeTime);
 
 export interface PostCardProps {
@@ -102,33 +98,12 @@ export default function PostCard({ post }: PostCardProps) {
           <Button onClick={handleClickOpen}>Delete</Button>
         </CardActions>
       </Card>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{'Do you want to delete this post?'}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure to delete post{' '}
-            <Typography component={'span'} sx={{ display: 'inline', color: 'primary.main' }}>
-              {post.title}
-            </Typography>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button
-            onClick={() => {
-              handleDeletePost(post.id);
-            }}
-            autoFocus
-          >
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <PostModal
+        post={post}
+        openState={open}
+        handleClose={handleClose}
+        handleDeletePost={handleDeletePost}
+      ></PostModal>
     </Box>
   );
 }

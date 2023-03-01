@@ -53,11 +53,11 @@ export default function PostDetail({ post }: PostDetailProps) {
           <Typography variant="body1" my={1}>
             {description}
           </Typography>
-          <Typography variant="body1" my={1}>
+          <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non totam pariatur quibusdam
             tenetur nemo tempora incidunt ex doloremque exercitationem dicta. Corporis fuga totam
             nulla voluptatibus possimus similique aliquid nobis illo.
-          </Typography>
+          </p>
           <Box
             component="img"
             width="100%"
