@@ -38,7 +38,7 @@ export default function PostModal({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
+        <Button onClick={handleClose}>Cancel</Button>
         <Button
           onClick={() => {
             handleDeletePost(post.id);
