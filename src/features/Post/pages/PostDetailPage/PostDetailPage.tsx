@@ -10,6 +10,7 @@ export interface PostDetailPageProps {}
 
 export default function PostDetailPage(props: PostDetailPageProps) {
   const params = useParams();
+  const postId = params.postId || '';
 
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
@@ -26,8 +27,7 @@ export default function PostDetailPage(props: PostDetailPageProps) {
     const controller = new AbortController();
     const getDataId = async () => {
       try {
-        if (!params.postId) return;
-        const { data } = await postApi.getById(params.postId, controller.signal);
+        const { data } = await postApi.getById(postId, controller.signal);
         setPost(data);
         setIsSuccess(true);
         setLoading(false);

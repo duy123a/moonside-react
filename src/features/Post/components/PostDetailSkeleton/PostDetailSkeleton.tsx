@@ -7,6 +7,7 @@ export interface PostDetailSkeletonProps {}
 export default function PostDetailSkeleton(props: PostDetailSkeletonProps) {
   return (
     <Box
+      aria-label="loadingPostDetail"
       component="main"
       sx={{
         display: 'flex',
