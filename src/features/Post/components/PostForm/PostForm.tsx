@@ -4,15 +4,12 @@ import RandomImageField from '@/components/FormControl/RandomImageField';
 import TextareaField from '@/components/FormControl/TextareaField';
 import UploadField from '@/components/FormControl/UploadField';
 import { Post } from '@/types/postsType';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import * as React from 'react';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
 import { IMAGE_SOURCE } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Box, Button, FormControl, FormLabel } from '@mui/material';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 export interface PostFormProps {
   post?: Post;

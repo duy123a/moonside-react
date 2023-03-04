@@ -1,14 +1,10 @@
 import postApi from '@/apis/postsApi';
 import { Post } from '@/types/postsType';
 import { jsonToFormData, removeUnusedFields } from '@/utils';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Box, Container, Divider, Paper, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
 import PostForm from '../../components/PostForm';
 
 export interface PostEditProps {

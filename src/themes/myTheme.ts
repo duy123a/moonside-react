@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material';
 import './myThemeD';
 
 // Material-UI has got typing declarations already defined so you can't just add extra properties to it.

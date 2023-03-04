@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { Post } from '@/types/postsType';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
 import PostCard from '../PostCard';
 
 export interface PostListProps {

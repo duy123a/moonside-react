@@ -1,3 +1,4 @@
+import '@fontsource/roboto';
 import { useRoutes } from 'react-router-dom';
 import './App.css';
 import Dashboard from './components/Dashboard';

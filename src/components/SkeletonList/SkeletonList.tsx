@@ -1,7 +1,4 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
+import { Box, Grid, Skeleton } from '@mui/material';
 
 export interface SkeletonListProps {
   length?: number;

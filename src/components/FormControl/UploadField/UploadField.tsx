@@ -1,10 +1,6 @@
+import { Box, Button, FormControl, FormHelperText, Typography } from '@mui/material';
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import { Control, Controller, useController } from 'react-hook-form';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Control, Controller } from 'react-hook-form';
 
 export interface UploadFieldProps {
   control: Control<any>;

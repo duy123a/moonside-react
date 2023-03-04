@@ -1,12 +1,7 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import Box from '@mui/material/Box';
+import { Box, Button, FormControl, FormHelperText, OutlinedInput, Typography } from '@mui/material';
+
 import { Control, Controller } from 'react-hook-form';
-import FormLabel from '@mui/material/FormLabel';
-import Typography from '@mui/material/Typography';
-import OutlinedInput from '@mui/material/OutlinedInput';
+
 import { randomNumber } from '@/utils';
 
 export interface RandomImageFieldProps {

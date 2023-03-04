@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
 import InputField from '@/components/FormControl/InputField';
-import { useForm } from 'react-hook-form';
-import debounce from 'lodash.debounce';
 import { SearchParams } from '@/types/postsType';
+import { Box } from '@mui/material';
+import debounce from 'lodash.debounce';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
 export interface FilterProps {
   filterParams: SearchParams;

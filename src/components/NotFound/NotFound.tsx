@@ -1,6 +1,4 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export interface NotFoundProps {}

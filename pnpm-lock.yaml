@@ -4,6 +4,7 @@ specifiers:
   '@babel/core': ^7.21.0
   '@emotion/react': ^11.10.6
   '@emotion/styled': ^11.10.6
+  '@fontsource/roboto': ^4.5.8
   '@hookform/resolvers': ^2.9.11
   '@mui/icons-material': ^5.11.11
   '@mui/material': ^5.11.11
@@ -43,6 +44,7 @@ specifiers:
 dependencies:
   '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
+  '@fontsource/roboto': 4.5.8
   '@hookform/resolvers': 2.9.11_react-hook-form@7.43.4
   '@mui/icons-material': 5.11.11_h5fh5ntwxtyr677wxvzgewjsma
   '@mui/material': 5.11.11_xqeqsl5kvjjtyxwyi3jhw3yuli
@@ -762,6 +764,10 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@fontsource/roboto/4.5.8:
+    resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
+    dev: false
 
   /@hookform/resolvers/2.9.11_react-hook-form@7.43.4:
     resolution: {integrity: sha512-bA3aZ79UgcHj7tFV7RlgThzwSSHZgvfbt2wprldRkYBcMopdMvHyO17Wwp/twcJasNFischFfS7oz8Katz8DdQ==}

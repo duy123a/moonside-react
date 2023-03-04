@@ -1,9 +1,6 @@
-import * as React from 'react';
+import { IMAGE_SOURCE, RADIO_OPTIONS } from '@/utils';
+import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { Control, Controller } from 'react-hook-form';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { RADIO_OPTIONS, IMAGE_SOURCE } from '@/utils';
 
 export interface RadioFieldProps {
   control: Control<any>;

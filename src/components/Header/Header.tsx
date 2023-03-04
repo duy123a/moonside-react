@@ -1,15 +1,17 @@
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
-import MuiLink from '@mui/material/Link';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Link as MuiLink,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import * as React from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 

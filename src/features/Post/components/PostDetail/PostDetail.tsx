@@ -1,11 +1,6 @@
 import { Post } from '@/types/postsType';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
+import { Box, Container, Divider, Paper, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import * as React from 'react';
 
 export interface PostDetailProps {
   post: Post;

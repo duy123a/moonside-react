@@ -1,9 +1,5 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Box, Container, Link, Paper, Typography } from '@mui/material';
 import { memo } from 'react';
 
 export interface FooterProps {}

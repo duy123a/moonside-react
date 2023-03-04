@@ -1,8 +1,7 @@
 import imageUrl from '@/assets/dashboard.webp';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Box, { BoxProps } from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { Box, BoxProps, styled } from '@mui/material';
 import * as React from 'react';
 
 export interface MainLayoutProps {
