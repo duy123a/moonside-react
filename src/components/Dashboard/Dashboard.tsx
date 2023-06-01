@@ -16,14 +16,14 @@ export default function DashBoard(props: DashBoardProps) {
         py: 2,
       }}
     >
-      <Container sx={{ bgcolor: 'box.main' }}>
+      {/* <Container sx={{ bgcolor: 'box.main' }}>
         <Typography component="h1" variant="h3" sx={{ color: 'text.primary', textAlign: 'center' }}>
           Welcome
         </Typography>
         <Typography variant="h6" sx={{ color: 'text.primary', textAlign: 'center' }}>
           May the nightingale's singing follow you into your dream so you can find yourself again.
         </Typography>
-      </Container>
+      </Container> */}
     </Box>
   );
 }
